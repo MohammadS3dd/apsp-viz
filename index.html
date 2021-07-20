@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/assets/favicon.17e50649.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite App</title>
+  <script type="module" crossorigin src="/assets/index.8079966a.js"></script>
+  <link rel="modulepreload" href="/assets/vendor.fb307c32.js">
+  <link rel="stylesheet" href="/assets/index.e9fbdfd4.css">
+</head>
+  <body class="w-full h-full">
+    <div id="app"></div>
+
+    <div class="flex flex-col w-full h-screen">
+      <div
+        :class="'w-2 h-2 bg-'+color+'-400 fixed top-2 left-2'"
+        @mounted="afterMount"
+      ></div>
+      <div class="flex flex-row items-center h-10" >
+        <div v-if="ready" class="flex flex-row items-center" >
+
+          <button class="border p-2 ml-2" @click="prevStep">prev</button>
+          <button class="border p-2 ml-2" @click="nextStep">next</button>
+          <button class="border p-2 ml-2" @click="pause=false">play</button>
+          <button class="border p-2 ml-2" @click="pause=true">pause</button>
+          <!-- <button class="border p-2 ml-2" @click="init">init</button> -->
+          <span class="ml-2">tick delay : </span>
+          <input type="range" min="100" max="3000" class="ml-1" v-model="extraDelay" />
+        </div>
+      </div>
+      <div class="flex flex-row w-full">
+        <div class="flex w-2/3 relative">
+          <button class="border border-green-500 p-2 ml-2 absolute left-20 top-20 z-50" v-if="selectedNodes.length == 2" @click="userSelectAgain">select again</button>
+          <div
+          id="cy"
+          class="w-full h-full"
+          style="height: 500px; width: 500"
+        ></div></div>
+        <div class="flex flex-col p-10 w-1/3">
+          <div class="flex flex-col" v-if="ready">
+            <span>i: {{matrix.i}} </span>
+            <span>k: {{matrix.k}} </span>
+            <span>j: {{matrix.j}} </span>
+          </div>
+          
+          <span>enter the graph as 2D Adj matrix :</span>
+          <textarea name="message" rows="10" cols="30" class="border m-2" v-model="input"></textarea>
+          <button class="border p-2" @click="parseInput">parse</button>
+          <br>
+          example :
+          <br>
+          [[0, 3, 1e7, 5],<br>
+          [2, 0, 1e7, 8],<br>
+          [1e7, 1, 0, 1e7],<br>
+          [1e7, 1e7, 2, 0]]<br>
+        </div>
+      </div>
+      
+    </div>
+    <!-- {{dist_repr}} -->
+    <!-- <div v-for="item in dist_repr" class="flex flex-col" :key="item" >
+      {{item}} 
+
+    </div> -->
+    
+  </body>
+</html>
